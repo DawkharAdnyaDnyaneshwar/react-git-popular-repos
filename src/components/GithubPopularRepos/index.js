@@ -62,7 +62,7 @@ class GithubPopularRepos extends Component {
   }
 
   renderSuccess = repoList => (
-    <ul className="repo-item-container">
+    <ul className="repo-container">
       {repoList.map(eachRepo => (
         <RepositoryItem key={eachRepo.id} repoDetail={eachRepo} />
       ))}
@@ -76,6 +76,7 @@ class GithubPopularRepos extends Component {
         className="failure-img"
         alt="failure view"
       />
+      <p className="error-message">Something Went Wrong</p>
     </div>
   )
 
@@ -103,18 +104,22 @@ class GithubPopularRepos extends Component {
     const {activeId} = this.state
     return (
       <div className="main-container">
-        <h1 className="main-heading">Popular</h1>
-        <ul className="language-filter-container">
-          {languageFiltersData.map(eachFilterData => (
-            <LanguageFilterItem
-              key={eachFilterData.id}
-              detail={eachFilterData}
-              isActive={eachFilterData.id === activeId ? 'active' : ''}
-              updateActiveItem={this.updateActiveItem}
-            />
-          ))}
-        </ul>
-        {this.renderResult()}
+        <div className="responsive-container">
+          <h1 className="main-heading">Popular</h1>
+          <ul className="language-filter-container">
+            {languageFiltersData.map(eachFilterData => (
+              <LanguageFilterItem
+                key={eachFilterData.id}
+                detail={eachFilterData}
+                isActive={
+                  eachFilterData.id === activeId ? 'active-language-btn' : ''
+                }
+                updateActiveItem={this.updateActiveItem}
+              />
+            ))}
+          </ul>
+          {this.renderResult()}
+        </div>
       </div>
     )
   }
